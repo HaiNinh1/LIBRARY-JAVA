@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controller.BookListController">
+    <children>
+        <TableView fx:id="bookTable" layoutX="25.0" layoutY="25.0" prefHeight="250.0" prefWidth="450.0">
+            <columns>
+                <TableColumn fx:id="bookCodeColumn" text="Mã Sách" />
+                <TableColumn fx:id="bookNameColumn" text="Tên Sách" />
+                <TableColumn fx:id="totalQuantityColumn" text="Tổng số" />
+                <TableColumn fx:id="availableQuantityColumn" text="Hiện có" />
+                <TableColumn fx:id="borrowedQuantityColumn" text="Đã cho mượn" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>
