@@ -1,11 +1,14 @@
 package com.example.controller;
 
 import com.example.helper.Navigator;
+import com.example.model.Account;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
 
 public class StudentMenuController {
+
+    private Account currentAccount;
 
     public void onViewBooks(ActionEvent event) throws IOException {
         // Open Book List scene
@@ -30,5 +33,12 @@ public class StudentMenuController {
     public void onLogout(ActionEvent event) throws IOException {
         // Logout and return to login screen
         Navigator.getInstance().gotoLogin();
+    }
+
+    public void setCurrentAccount(Account account) {
+        this.currentAccount = account;
+
+        // Perform any initialization or setup with the account
+        System.out.println("Logged-in account: " + account.getEmail());
     }
 }
