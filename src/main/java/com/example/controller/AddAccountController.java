@@ -10,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.util.regex.Pattern;
+
 public class AddAccountController {
 
     @FXML
@@ -41,6 +43,17 @@ public class AddAccountController {
             return;
         }
 
+        if (!isValidEmail(email)) {
+            showAlert(Alert.AlertType.ERROR, "Invalid Email", "Please enter a valid email address (example@domain.com).");
+            return;
+        }
+
+        // Validate password strength
+        if (!isValidPassword(password)) {
+            showAlert(Alert.AlertType.ERROR, "Weak Password", "Password must be at least 6 characters long, containing both letters and numbers.");
+            return;
+        }
+
         // Check if the account already exists
         if (AccountManager.getInstance().isAccountExists(email)) {
             showAlert(Alert.AlertType.ERROR, "Error", "Tài khoản đã tồn tại");
@@ -48,7 +61,7 @@ public class AddAccountController {
             return;
         }
 
-        // Determine the account type (1 for Librarian, 2 for Student)
+        // (1 for Librarian, 2 for Student)
         int type = accountType.equals("Librarian") ? 1 : 2;
 
         // Add the new account to the database
@@ -73,5 +86,16 @@ public class AddAccountController {
     private void closeWindow() {
         Stage currentStage = (Stage) emailField.getScene().getWindow();
         currentStage.close();
+    }
+
+    private boolean isValidEmail(String email) {
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        return Pattern.matches(emailRegex, email);
+    }
+
+
+    private boolean isValidPassword(String password) {
+        String passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$";
+        return Pattern.matches(passwordRegex, password);
     }
 }
